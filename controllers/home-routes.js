@@ -105,12 +105,14 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
         {
           model: Comment,
           attributes: ["id", "content", "creator_id", "createdAt"],
-          order: [["createdAt", "ASC"]]
+          order: [["createdAt", "ASC"]],
         },
         {
-            model: Bloggers
-        }
+          model: Bloggers,
+          attributes: ["username"],
+        },
       ],
+      
     });
 
     console.log("postData", postData);
@@ -133,9 +135,9 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
     username: singlePost.Blogger.username,
     comments: singlePost.Comments,
     logged_in: req.session.logged_in,
+    commenter: singlePost.Bloggers.username //do not know if it will work.
+    //commentDate: singlePost.Comment
   });
-
-
 
   } catch (err) {
     res.status(500).json({
