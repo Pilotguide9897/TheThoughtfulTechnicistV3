@@ -20,7 +20,7 @@ router.post("/signup", async (req, res) => { //localhost:3001/api/users/signup
          .json({ message: "New user created successfully!", newUser });
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: "Server error!", err});
   }
 });
 

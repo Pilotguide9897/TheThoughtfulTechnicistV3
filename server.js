@@ -8,7 +8,7 @@ const session = require("express-session");
 
 // create an instance of the express app and define the port.
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 const sess = {
   secret: process.env.SESSION_SECRET,

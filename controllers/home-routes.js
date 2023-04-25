@@ -54,7 +54,7 @@ router.get("/login", async (req, res) => { // localhost:3001/login
 });
 
 // Render signup page
-router.get("/", async (req, res) => { // localhost:3001/signup
+router.get("/signup", async (req, res) => { // localhost:3001/signup
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
