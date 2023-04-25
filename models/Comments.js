@@ -15,12 +15,12 @@ Comment.init(
       autoIncrement: true,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
-      validate: {
-        isAlphanumeric: true,
-        len: [2, 250],
-      },
+      // validate: {
+      //   is: /^[a-zA-Z0-9 ]*$/,
+      //   len: [2, 250],
+      // },
     },
     creator_id: {
       type: DataTypes.INTEGER,

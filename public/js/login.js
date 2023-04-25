@@ -1,5 +1,11 @@
+// Client-side logic for travelling to login form
+const travelToLoginPage = async () => {
+    window.location.replace("/login");
+}
+
 // Client-side logic for managing login submission form
 const logInHandler = async (event) => {
+  console.log("logInHandler called");
   event.preventDefault();
 
 const email = document.querySelector("#email-login").value.trim();
@@ -9,7 +15,7 @@ if (email && password) {
     try {
       const dataToSend = { email, password };
 
-      const response = await fetch("/login", {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,4 +40,19 @@ if (email && password) {
   }
 };
 
-document.querySelector(".login-form").addEventListener("submit", logInHandler);
+const loginForm = document.querySelector(".login-form");
+if (loginForm) {
+  console.log("Attaching event listener to login form"); // Add this line
+  loginForm.addEventListener("submit", logInHandler);
+} else {
+  console.log("Login form not found"); // Add this line to check if the form is not found
+}
+
+
+const loginRedirector = document.querySelector("#loginRedirectionLink");
+if (loginRedirector) {
+  loginRedirector.addEventListener('click', travelToLoginPage);
+}
+
+
+

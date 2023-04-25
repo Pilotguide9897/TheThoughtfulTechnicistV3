@@ -6,7 +6,19 @@ const hasAuthorization = require("../../utils/authorize");
 // GET all posts by all users
 router.get("/", async (req, res) => { // localhost:3001/api/posts/
   try {
-    const postData = await BlogPost.findAll({});
+    const postData = await BlogPost.findAll({
+      include: [
+        {
+          model: Bloggers,
+          attributes: ["username"],
+        },
+      ],
+    });
+
+    if (!postData) {
+          res.status(400).json({ message: "No posts currently available." });
+          return;
+        }
 
     const blogPostData = postData.map((blogPost) =>
       blogPost.get({ plain: true })
@@ -75,7 +87,7 @@ router.get("/posts/:id", async (req, res) => { // localhost:3001/api/posts/:id
 });
 
 // POST new post
-router.post("/", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/new
+router.post("/new", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/new
   try {
     const username = await Bloggers.findByPk(req.session.user_id);
 
@@ -117,6 +129,28 @@ router.put("/update/:id", hasAuthorization, async (req, res) => { // localhost:3
     res.status(500).json({ message: "Unable to update blog post", err });
   }
 });
+
+// Create comment
+router.post("/post/:id", hasAuthorization, async (req, res) => {
+  console.log("Comment route called");
+  console.log("Request body:", req.body);
+  console.log("User ID:", req.session.user_id);
+  console.log("Post ID:", req.params.id);
+  try {
+    const postComment = await Comment.create({
+      content: req.body.commentContent,
+      creator_id: req.session.user_id,
+      post_id: parseInt(req.params.id),
+    });
+    console.log("Created comment:", postComment); // Log the created comment
+
+    await res.redirect(`/post/${req.params.id}`);
+  } catch (err) {
+    console.error(err); // Log the full error object
+    res.status(400).json({ error: err.message });
+  }
+});
+
 
 // DELETE post
 router.delete("/delete/:id", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/delete
