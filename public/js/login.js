@@ -1,3 +1,8 @@
+// Client-side logic for travelling to login form
+const travelToLoginPage = async () => {
+    window.location.replace("/login");
+}
+
 // Client-side logic for managing login submission form
 const logInHandler = async (event) => {
   event.preventDefault();
@@ -35,3 +40,4 @@ if (email && password) {
 };
 
 document.querySelector(".login-form").addEventListener("submit", logInHandler);
+document.querySelector("#loginRedirectionLink").addEventListener('click', travelToLoginPage);

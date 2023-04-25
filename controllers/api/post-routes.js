@@ -6,7 +6,19 @@ const hasAuthorization = require("../../utils/authorize");
 // GET all posts by all users
 router.get("/", async (req, res) => { // localhost:3001/api/posts/
   try {
-    const postData = await BlogPost.findAll({});
+    const postData = await BlogPost.findAll({
+      include: [
+        {
+          model: Bloggers,
+          attributes: ["username"],
+        },
+      ],
+    });
+
+    if (!postData) {
+          res.status(400).json({ message: "No posts currently available." });
+          return;
+        }
 
     const blogPostData = postData.map((blogPost) =>
       blogPost.get({ plain: true })
@@ -75,7 +87,7 @@ router.get("/posts/:id", async (req, res) => { // localhost:3001/api/posts/:id
 });
 
 // POST new post
-router.post("/", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/new
+router.post("/new", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/new
   try {
     const username = await Bloggers.findByPk(req.session.user_id);
 

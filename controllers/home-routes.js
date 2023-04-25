@@ -71,8 +71,8 @@ router.get("/", async (req, res) => { // localhost:3001/signup
   }
 });
 
-// Render individual blog posts in their own separate page
-router.get("/posts/:id", hasAuthorization, async (req, res) => { //localhost:3001/posts/:id
+// Render individual blog posts in their own separate page -- linked from the homepage
+router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001/post/:id
   try {
     const postData = await BlogPost.findByPk(req.params.id, {
       include: [
@@ -110,8 +110,46 @@ router.get("/posts/:id", hasAuthorization, async (req, res) => { //localhost:300
   }
 });
 
+// Render a user's individual blog post for editing or deletion
+router.get("/edit/:id", hasAuthorization, async (req, res) => { // localhost:3001/edit/:id
+  try {
+    const postData = await BlogPost.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment,
+          attributes: ["id", "content", "creator_id", "createdAt"],
+          order: [["createdAt", "ASC"]],
+        },
+        {
+          model: Bloggers,
+        },
+      ],
+    });
+
+    if (!postData) {
+      res.status(400).json({
+        message: "Unable locate your post.",
+        data: postData,
+      });
+      return;
+    }
+
+    const singlePost = postData.get({ plain: true });
+
+    res.render("post", {
+      singlePost,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "There was an unexpected difficulty retrieving the post.",
+      error: err,
+    });
+  }
+});
+
 // Render create new post page
-router.get("/new", hasAuthorization, async (req, res) => { //localhost:3001/new
+router.get("/new", hasAuthorization, async (req, res) => { // localhost:3001/new
 try {
   res.render("createPost", {
     logged_in: req.session.logged_in,
