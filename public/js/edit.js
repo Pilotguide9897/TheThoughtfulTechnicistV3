@@ -27,8 +27,14 @@ const modifyPageHandler = async (userPostId) => {
 };
 
 // Edit your post
-document.getElementById("edit-post-form").addEventListener("submit", async (event) => {
+
+const editPostForm = document.getElementById("edit-post-form");
+if (editPostForm) {
+editPostForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  postEditHandler
+});
+
 
 const myPostTitle = document.getElementById("edit-title").value;
 const myPost_content = document.getElementById("edit-content").value;
@@ -43,7 +49,7 @@ const postEditHandler = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, post_content }),
+      body: JSON.stringify({ myPostTitle, myPost_content }),
     });
 
     if (response.ok) {
@@ -55,7 +61,7 @@ const postEditHandler = async () => {
     console.error(err);
   }
 };
-});
+};
 
 
 

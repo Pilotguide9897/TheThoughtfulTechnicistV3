@@ -14,12 +14,14 @@ router.post("/signup", async (req, res) => { //localhost:3001/api/users/signup
     req.session.save(() => {
       req.session.user_id = newUser.id;
       req.session.logged_in = true;
+      req.session.username = newUser.username;
 
        res
          .status(200)
          .json({ message: "New user created successfully!", newUser });
     });
   } catch (err) {
+    console.error("Error in /signup route:", err);
     res.status(500).json({ message: "Server error!", err});
   }
 });
@@ -38,6 +40,7 @@ router.post("/login", async (req, res) => { //localhost:3001/api/users/login
         .json({ message: "Incorrect email or password, please try again" });
       return;
     }
+
     // Create a session for the user
     req.session.save(() => {
       req.session.user_id = userData.id;

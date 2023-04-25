@@ -38,10 +38,13 @@ const createPostHandler = async (event) => {
   }
 };
 
-document
-  .querySelector("#create-post-form")
-  .addEventListener("submit", createPostHandler);
+const createPostForm = document.querySelector("#create-post-form");
+if (createPostForm) {
+  createPostForm.addEventListener("submit", createPostHandler);
+}
 
-document
-  .querySelector("#dashboard-createPost")
-  .addEventListener("click", renderNewPostPage);
+const dashboardCreatePostBtn = document.querySelector("#dashboard-createPost");
+if (dashboardCreatePostBtn) {
+  dashboardCreatePostBtn.addEventListener("click", renderNewPostPage);
+}
+

@@ -130,6 +130,28 @@ router.put("/update/:id", hasAuthorization, async (req, res) => { // localhost:3
   }
 });
 
+// Create comment
+router.post("/post/:id", hasAuthorization, async (req, res) => {
+  console.log("Comment route called");
+  console.log("Request body:", req.body);
+  console.log("User ID:", req.session.user_id);
+  console.log("Post ID:", req.params.id);
+  try {
+    const postComment = await Comment.create({
+      content: req.body.commentContent,
+      creator_id: req.session.user_id,
+      post_id: parseInt(req.params.id),
+    });
+    console.log("Created comment:", postComment); // Log the created comment
+
+    await res.redirect(`/post/${req.params.id}`);
+  } catch (err) {
+    console.error(err); // Log the full error object
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
 // DELETE post
 router.delete("/delete/:id", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/delete
   try {

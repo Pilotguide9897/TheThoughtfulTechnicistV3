@@ -10,6 +10,7 @@ router.get("/", async (req, res) => { // localhost:3001/
         {
           model: Bloggers,
           attributes: ["username"],
+          order: [["createdAt", "DESC"]],
         },
       ],
     });
@@ -71,6 +72,31 @@ router.get("/signup", async (req, res) => { // localhost:3001/signup
   }
 });
 
+// Render dashboard
+router.get("/dashboard", hasAuthorization, async (req, res) => {
+  try {
+    //const userId = req.session.user_id; // Get the user ID from the session
+
+    const postData = await BlogPost.findAll({
+      where: {
+        creator_id: req.session.user_id, // Filter posts by the user's ID
+      },
+    });
+
+    const blogpostData = postData.map((blogPost) =>
+      blogPost.get({ plain: true })
+    );
+
+    res.render("dashboard", {
+      blogpostData,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // Render individual blog posts in their own separate page -- linked from the homepage
 router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001/post/:id
   try {
@@ -87,6 +113,8 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
       ],
     });
 
+    console.log("postData", postData);
+
       if (!postData) {
         res.status(400).json({
           message: "Unable locate your post.",
@@ -96,11 +124,18 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
       }
 
     const singlePost = postData.get({ plain: true });
+    console.log("singlePost", singlePost);
 
-    res.render("post", {
-      singlePost,
-      logged_in: req.session.logged_in,
-    });
+  res.render("post", {
+    title: singlePost.title,
+    post_content: singlePost.post_content,
+    createdAt: singlePost.createdAt,
+    username: singlePost.Blogger.username,
+    comments: singlePost.Comments,
+    logged_in: req.session.logged_in,
+  });
+
+
 
   } catch (err) {
     res.status(500).json({

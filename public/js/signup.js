@@ -20,6 +20,8 @@ const signUpHandler = async (event) => {
       if (approval.ok) {
         const responseData = await approval.json();
         console.log("Server response:", responseData);
+        alert("You have successfully created a new account!");
+        document.location.replace('/');
       } else {
         console.error("Error:", approval.statusText);
       }
@@ -29,6 +31,8 @@ const signUpHandler = async (event) => {
   }
 };
 
-document
-  .querySelector(".signup-form")
-  .addEventListener("submit", signUpHandler);
+const signupForm = document.querySelector("#signup-form");
+if (signupForm) {
+  signupForm.addEventListener("submit", signUpHandler);
+}
+
