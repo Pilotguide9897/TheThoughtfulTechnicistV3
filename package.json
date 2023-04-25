@@ -1,0 +1,37 @@
+{
+  "name": "14-thethoughtfultechnicist",
+  "version": "1.0.0",
+  "description": "A CMS-style blog where developers can publish their blog posts and comment on other developers' posts. Built from scratch in the MVC paridigm and deployed to Heroku. Uses Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seeds": "node seeds/index.js",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pilotguide9897/TheThoughtfulTechnicist.git"
+  },
+  "author": "Jared Green",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pilotguide9897/TheThoughtfulTechnicist/issues"
+  },
+  "homepage": "https://github.com/Pilotguide9897/TheThoughtfulTechnicist#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-session-sequelize": "^7.1.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "handlebars-layouts": "^3.1.4",
+    "moment": "^2.29.4",
+    "mysql2": "^3.2.3",
+    "sequelize": "^6.31.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
