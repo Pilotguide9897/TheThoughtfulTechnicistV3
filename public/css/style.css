@@ -1,0 +1,31 @@
+:root {
+    --bgColor: lightblue;
+}
+
+.post {
+    cursor: pointer;
+}
+
+.userPost {
+    cursor: pointer;
+}
+
+.bg-lightblue {
+    background-color: var(--bgColor);
+}
+
+.login-form {
+    background-color: var(--bgColor);
+}
+
+.signup-form {
+    background-color: var(--bgColor);
+}
+
+.myFooter {
+    text-align: center;
+}
+
+#edit-post-form {
+    background-color: var(--bgColor);
+}
