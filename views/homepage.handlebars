@@ -1,0 +1,12 @@
+<div class="blogPosts">
+  {{#each blogpostData}}
+    <div class="post bg-lightblue" data-href="/post/{{id}}" data-post-id="{{id}}">
+      <h2>{{title}}</h2>
+      <p>{{post_content}}</p>
+      <p>Posted by {{Blogger.username}} on {{format_date createdAt}}</p>
+      <button type="button" class="btn btn-success homepage-viewIndividualPost">View Post</button>
+      <br>
+      <br>
+    </div>
+  {{/each}}
+</div>

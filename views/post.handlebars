@@ -1,0 +1,22 @@
+<div class="post-main">
+    <div class="post-container">
+        <div class="post">
+        <h2>{{title}}</h2>
+        <p>{{post_content}}</p>
+        <p>Posted on {{format_date createdAt}}</p>
+        </div>
+    </div>
+    <div class="comments-container">
+      <h3>Comments</h3>
+      {{#each comments}}
+        <div class="comment">
+          <p>{{this}}</p>
+        </div>
+      {{/each}}
+    </div>
+    <form id="comment-form">
+      <label for="comment">Add a comment:</label>
+      <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+</div>

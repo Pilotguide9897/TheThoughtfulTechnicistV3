@@ -1,0 +1,17 @@
+<section>
+  <h2>Edit Post</h2>
+  <form class="edit-post-form" id="edit-post-form">
+    <div class="mb-3">
+      <label for="edit-title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="edit-title" name="title" placeholder="Enter post title" value="{{existingPost.title}}" required>
+    </div>
+    <div class="mb-3">
+      <label for="edit-content" class="form-label">Content</label>
+      <textarea class="form-control" id="edit-content" name="content" rows="3" placeholder="Enter post content" required>{{existingPost.post_content}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Post</button>
+    <button type="submit" id="delete-post" class="btn btn-danger">Delete Post</button>
+  </form>
+</section>
+
+
