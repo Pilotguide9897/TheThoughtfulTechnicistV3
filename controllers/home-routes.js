@@ -106,6 +106,12 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
        {
          model: Comment,
          attributes: ["id", "content", "creator_id", "createdAt"],
+         include: [
+           {
+             model: Bloggers,
+             attributes: ["username"],
+           },
+         ],
        },
        {
          model: Bloggers,
@@ -114,6 +120,7 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
      ],
      order: [[Comment, "createdAt", "ASC"]],
    });
+
 
 
     console.log("postData", postData);
