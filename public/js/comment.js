@@ -28,12 +28,24 @@ console.log(urlPath);
 const generalPostId = urlPath.split("/")[2];
 
 // Add an event listener for form submission
-document.getElementById("comment-form").addEventListener("submit", (event) => {
-  event.preventDefault();
+document.getElementById("comment-form")
 
-  const commentContent = document.getElementById("commentDataToAdd").value;
+
+
+
+const commentForm = document.getElementById("comment-form");
+
+
+if (commentForm) {
+commentForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+const commentContent = document.getElementById("commentDataToAdd").value;
 
   // Call the postCommentHandler function with the necessary arguments
-  postCommentHandler(commentContent, generalPostId);
+postCommentHandler(commentContent, generalPostId);
 });
+}
+
+
+  
 

@@ -15,7 +15,11 @@ const travelToPost = async (interestedPostId) => {
   }
 };
 
-$(".homepage-viewIndividualPost").on("click", function () {
-  const interestedPostId = $(this).closest(".post").data("post-id");
-  travelToPost(interestedPostId);
+$(document).ready(function () {
+  $(".homepage-viewIndividualPost").on("click", function () {
+    console.log("clicked");
+    const interestedPostId = $(this).closest(".post").data("post-id");
+    console.log(interestedPostId);
+    travelToPost(interestedPostId);
+  });
 });

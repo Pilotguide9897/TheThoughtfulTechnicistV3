@@ -100,20 +100,21 @@ router.get("/dashboard", hasAuthorization, async (req, res) => {
 // Render individual blog posts in their own separate page -- linked from the homepage
 router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001/post/:id
   try {
-    const postData = await BlogPost.findByPk(req.params.id, {
-      include: [
-        {
-          model: Comment,
-          attributes: ["id", "content", "creator_id", "createdAt"],
-          order: [["createdAt", "ASC"]],
-        },
-        {
-          model: Bloggers,
-          attributes: ["username"],
-        },
-      ],
-      
-    });
+    console.log(req.params.id);
+   const postData = await BlogPost.findByPk(req.params.id, {
+     include: [
+       {
+         model: Comment,
+         attributes: ["id", "content", "creator_id", "createdAt"],
+       },
+       {
+         model: Bloggers,
+         attributes: ["username"],
+       },
+     ],
+     order: [[Comment, "createdAt", "ASC"]],
+   });
+
 
     console.log("postData", postData);
 
@@ -135,11 +136,12 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
     username: singlePost.Blogger.username,
     comments: singlePost.Comments,
     logged_in: req.session.logged_in,
-    commenter: singlePost.Bloggers.username //do not know if it will work.
+    //commenter: singlePost.Bloggers.username //do not know if it will work.
     //commentDate: singlePost.Comment
   });
 
   } catch (err) {
+     console.error("Error in /post/:id route:", err);
     res.status(500).json({
       message: 'There was an unexpected difficulty retrieving the post.',
       error: err,

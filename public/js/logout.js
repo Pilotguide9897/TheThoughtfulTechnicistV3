@@ -1,5 +1,5 @@
 // Client-side logic for logging out
-const logOutHandlerF = async () => {
+const logOutHandler = async () => {
   try {
     const attempt = await fetch("/api/users/logout", {
       method: "POST",
@@ -18,5 +18,5 @@ const logOutHandlerF = async () => {
 
 const logoutLink = document.getElementById("logout");
 if (logoutLink) {
-  logoutLink.addEventListener("click", logOutHandlerF);
+  logoutLink.addEventListener("click", logOutHandler);
 }
