@@ -4,7 +4,7 @@ const { BlogPost, Bloggers, Comment } = require("../../models");
 const hasAuthorization = require("../../utils/authorize");
 
 // GET all posts by all users
-router.get("/", async (req, res) => { //localhost:3001/api/
+router.get("/", async (req, res) => { // localhost:3001/api/posts/
   try {
     const postData = await BlogPost.findAll({});
 
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => { //localhost:3001/api/
 });
 
 // GET all posts by current user
-router.get("/dashboard", async (req, res) => { //localhost:3001/dashboard/
+router.get("/dashboard", async (req, res) => { // localhost:3001/api/posts/dashboard/
   try {
     const userId = req.session.user_id; // Get the user ID from the session
 
@@ -46,7 +46,7 @@ router.get("/dashboard", async (req, res) => { //localhost:3001/dashboard/
 });
 
 // GET posts by id
-router.get("/posts/:id", async (req, res) => { //localhost:3001/api/posts/:id
+router.get("/posts/:id", async (req, res) => { // localhost:3001/api/posts/:id
   try {
     const postData = await BlogPost.findByPk(req.params.id, {
       include: [{ model: User }],
@@ -75,7 +75,7 @@ router.get("/posts/:id", async (req, res) => { //localhost:3001/api/posts/:id
 });
 
 // POST new post
-router.post("/", hasAuthorization, async (req, res) => {
+router.post("/", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/new
   try {
     const username = await Bloggers.findByPk(req.session.user_id);
 
@@ -93,7 +93,7 @@ router.post("/", hasAuthorization, async (req, res) => {
 });
 
 // UPDATE post by id
-router.put("/update/:id", hasAuthorization, async (req, res) => {
+router.put("/update/:id", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/update/:id
   try {
     const postId = req.params.id;
     const { title, post_content } = req.body;
@@ -119,7 +119,7 @@ router.put("/update/:id", hasAuthorization, async (req, res) => {
 });
 
 // DELETE post
-router.delete("/delete/:id", hasAuthorization, async (req, res) => {
+router.delete("/delete/:id", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/delete
   try {
     const postId = req.params.id;
     const postToDelete = await BlogPost.findOne({

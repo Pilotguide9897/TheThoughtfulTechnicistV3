@@ -4,7 +4,7 @@ const router = require("express").Router();
 const { Bloggers } = require("../../models");
 
 // signup
-router.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res) => { //localhost:3001/api/users/signup
   try {
     const newUser = await Bloggers.create({
       username: req.body.username,
@@ -25,7 +25,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // login
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => { //localhost:3001/api/users/login
   try {
     const { email, password } = req.body;
     const userData = await Bloggers.findOne({
@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
 });
 
 // logout
-router.post("/logout", (req, res) => {
+router.post("/logout", (req, res) => { // localhost:3001/api/users/logout
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

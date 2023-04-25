@@ -3,7 +3,7 @@ const { BlogPost, Bloggers, Comment } = require("../models");
 const hasAuthorization = require("../utils/authorize");
 
 // Render homepage
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => { // localhost:3001/
   try {
     const postData = await BlogPost.findAll({
       include: [
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 });
 
 // Render login page
-router.get("/login", async (req, res) => {
+router.get("/login", async (req, res) => { // localhost:3001/login
   if (req.session.logged_in) {
     res.redirect('/dashboard');
     return;
@@ -54,7 +54,7 @@ router.get("/login", async (req, res) => {
 });
 
 // Render signup page
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => { // localhost:3001/signup
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
@@ -72,7 +72,7 @@ router.get("/", async (req, res) => {
 });
 
 // Render individual blog posts in their own separate page
-router.get("/posts/:id", hasAuthorization, async (req, res) => {
+router.get("/posts/:id", hasAuthorization, async (req, res) => { //localhost:3001/posts/:id
   try {
     const postData = await BlogPost.findByPk(req.params.id, {
       include: [
@@ -111,7 +111,7 @@ router.get("/posts/:id", hasAuthorization, async (req, res) => {
 });
 
 // Render create new post page
-router.get("/new", hasAuthorization, async (req, res) => {
+router.get("/new", hasAuthorization, async (req, res) => { //localhost:3001/new
 try {
   res.render("createPost", {
     logged_in: req.session.logged_in,
