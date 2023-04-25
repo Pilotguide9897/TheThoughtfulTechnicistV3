@@ -1,6 +1,6 @@
 <div class="userBlogPosts">
   {{#each blogpostData}}
-    <div class="userPost bg-lightblue" id="editablePost" data-postId="{{id}}">
+    <div class="userPost bg-lightblue" id="editablePost" data-post-id="{{id}}">
       <h2>{{title}}</h2>
       <p>Posted on {{format_date createdAt}}</p>
       <button type="button" class="btn btn-success dashboard-viewIndividualUserPost">View Post</button>
@@ -13,5 +13,6 @@
 <div>
   <button type="button" class="btn btn-secondary" id="dashboard-createPost">Create Post</button>
 </div>
+
 
 

@@ -6,7 +6,10 @@
  // Logic to get the id for each post
  viewPostButtons.forEach((button) => {
    button.addEventListener("click", (event) => {
+    console.log("click");
      const userPostId = event.target.closest(".userPost").dataset.postId;
+     console.log(userPostId);
+     modifyPageHandler(userPostId);
    });
  });
 
