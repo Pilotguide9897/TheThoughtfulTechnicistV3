@@ -72,7 +72,7 @@ router.get("/", async (req, res) => {
 });
 
 // Render individual blog posts in their own separate page
-router.get("/posts/:id", async (req, res) => {
+router.get("/posts/:id", hasAuthorization, async (req, res) => {
   try {
     const postData = await BlogPost.findByPk(req.params.id, {
       include: [
