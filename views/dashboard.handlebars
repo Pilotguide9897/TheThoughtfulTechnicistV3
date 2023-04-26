@@ -1,17 +1,16 @@
 <div class="userBlogPosts">
   {{#each blogpostData}}
+    <br>
     <div class="userPost bg-lightblue" id="editablePost" data-post-id="{{id}}">
-      <h2>{{title}}</h2>
-      <p>Posted on {{format_date createdAt}}</p>
-      <button type="button" class="btn btn-success dashboard-viewIndividualUserPost">View Post</button>
-      <br>
-      <br>
+      <h2 class="post-title-text">{{title}}</h2>
+      <p>Posted on <span class="bold-text">{{format_date createdAt}}.</span> </p>
+      <button type="button" class="btn btn-secondary dashboard-viewIndividualUserPost">View Post</button>
     </div>
   {{/each}}
 </div>
 <br>
 <div>
-  <button type="button" class="btn btn-secondary" id="dashboard-createPost">Create Post</button>
+  <button type="button" class="btn btn-success" id="dashboard-createPost">Create Post</button>
 </div>
 
 
