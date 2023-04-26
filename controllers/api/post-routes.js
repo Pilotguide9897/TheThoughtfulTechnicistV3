@@ -23,7 +23,8 @@ router.get("/", async (req, res) => { // localhost:3001/api/posts/
     const blogPostData = postData.map((blogPost) =>
       blogPost.get({ plain: true })
     );
-
+    
+    console.log (postData);
     res.render("dashboard", {
       blogPostData,
       logged_in: req.session.logged_in,
@@ -108,8 +109,10 @@ router.post("/new", hasAuthorization, async (req, res) => { // localhost:3001/ap
 router.put("/update/:id", hasAuthorization, async (req, res) => { // localhost:3001/api/posts/update/:id
   try {
     const postId = req.params.id;
+    console.log("Request Post ID:", postId);
     const { title, post_content } = req.body;
-    console.log(req.body);
+    console.log("Request Body:", req.body);
+    console.log({ creator_id: req.session.user_id});
     const updatedPost = await BlogPost.update(
       { title, post_content },
       {
@@ -121,11 +124,14 @@ router.put("/update/:id", hasAuthorization, async (req, res) => { // localhost:3
     );
 
     if (updatedPost[0]) {
+      console.log("Blog post updated successfully");
       res.status(200).json({ message: "Blog post updated successfully." });
     } else {
+      console.log("Blog post not found");
       res.status(404).json({ message: "Blog post not found." });
     }
   } catch (err) {
+    console.error("Error in /update/:id route:", err);
     res.status(500).json({ message: "Unable to update blog post", err });
   }
 });
