@@ -15,7 +15,6 @@
 
 const modifyPageHandler = async (userPostId) => {
   console.log("function registered too");
-
   try {
     const response = await fetch(`/edit/${userPostId}`, {
       method: "GET",
@@ -30,40 +29,52 @@ const modifyPageHandler = async (userPostId) => {
 };
 
 // Edit your post
-
 const editPostForm = document.getElementById("edit-post-form");
 if (editPostForm) {
-editPostForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  postEditHandler
-});
+  editPostForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    console.log("update handler recognized");
+    postEditHandler();
+  });
 
+  // Get the post ID from the URL
+  const urlPath = window.location.pathname;
+  console.log(urlPath);
+  const currentPostId = urlPath.split("/")[2];
+  console.log("Current Post ID:", currentPostId);
 
-const myPostTitle = document.getElementById("edit-title").value;
-const myPost_content = document.getElementById("edit-content").value;
+  const postEditHandler = async () => {
+    console.log("postEditHandler called");
 
-const postEditHandler = async () => {
-  console.log("postEditHandler called");
-  myPostId = req.params.id
+    try {
 
-     try {
-    const response = await fetch(`/api/post/update/${userPostId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ myPostTitle, myPost_content }),
-    });
+      const myPostTitle = document.getElementById("edit-title").value;
+      const myPost_content = document.getElementById("edit-content").value;
+      console.log("Current Post ID inside postEditHandler:", currentPostId);
+      const response = await fetch(`/api/posts/update/${currentPostId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: myPostTitle,
+          post_content: myPost_content,
+        }),
+      });
 
-    if (response.ok) {
-      window.location.href = "/dashboard";
-    } else {
-      console.error("Error submitting comment");
+      if (response.ok) {
+        console.log("Response is OK");
+        alert("Updated post!");
+        window.location.href = "/dashboard";
+      } else {
+        console.error("Error submitting comment");
+        console.log("Response status:", response.status);
+        console.log("Response text:", await response.text());
+      }
+    } catch (err) {
+      console.error("Error in postEditHandler:", err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-};
+  };
 };
 
 

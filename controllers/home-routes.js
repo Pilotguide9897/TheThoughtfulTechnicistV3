@@ -158,41 +158,60 @@ router.get("/post/:id", hasAuthorization, async (req, res) => { //localhost:3001
 
 // Render a user's individual blog post for editing or deletion
 router.get("/edit/:id", hasAuthorization, async (req, res) => { // localhost:3001/edit/:id
-  try {
-    const postData = await BlogPost.findByPk(req.params.id, {
-      include: [
-        {
-          model: Comment,
-          attributes: ["id", "content", "creator_id", "createdAt"],
-          order: [["createdAt", "ASC"]],
-        },
-        {
-          model: Bloggers,
-        },
-      ],
-    });
+   try {
+    console.log(req.params.id);
+   const postData = await BlogPost.findByPk(req.params.id, {
+     include: [
+       {
+         model: Comment,
+         attributes: ["id", "content", "creator_id", "createdAt"],
+         include: [
+           {
+             model: Bloggers,
+             attributes: ["username"],
+           },
+         ],
+       },
+       {
+         model: Bloggers,
+         attributes: ["username"],
+       },
+     ],
+     order: [[Comment, "createdAt", "ASC"]],
+   });
 
-    if (!postData) {
-      res.status(400).json({
-        message: "Unable locate your post.",
-        data: postData,
-      });
-      return;
-    }
+
+
+    console.log("postData", postData);
+
+      if (!postData) {
+        res.status(400).json({
+          message: "Unable locate your post.",
+          data: postData,
+        });
+        return;
+      }
 
     const singlePost = postData.get({ plain: true });
+    console.log("singlePost", singlePost);
 
-    res.render("post", {
-      singlePost,
+    res.render("edit", {
+      existingPost: singlePost,
+      createdAt: singlePost.createdAt,
+      username: singlePost.Blogger.username,
+      comments: singlePost.Comments,
       logged_in: req.session.logged_in,
     });
+
   } catch (err) {
+     console.error("Error in /post/:id route:", err);
     res.status(500).json({
-      message: "There was an unexpected difficulty retrieving the post.",
+      message: 'There was an unexpected difficulty retrieving the post.',
       error: err,
     });
   }
-});
+  });
+
 
 // Render create new post page
 router.get("/new", hasAuthorization, async (req, res) => { // localhost:3001/new
