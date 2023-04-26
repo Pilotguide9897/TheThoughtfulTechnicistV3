@@ -14,6 +14,11 @@
     background-color: var(--bgColor);
 }
 
+.edit-section-title {
+    font-family: 'Inconsolata', monospace;
+    color: rgb(210, 159, 30);
+}
+
 #title-text {
    font-family: 'Inconsolata', monospace;
    font-size: x-large;
@@ -33,6 +38,23 @@
        font-family: 'Inconsolata', monospace;
       color: gray; /* Change the color of the placeholder text */
     }
+
+.homepage-viewIndividualPost {
+    margin-bottom: -15px;
+}
+
+#edit-title {
+    font-family: 'Inconsolata', monospace;
+}
+
+#edit-content {
+  font-family: 'Inconsolata', monospace;
+}
+
+#commentDataToAdd {
+  font-family: 'Inconsolata', monospace;
+}
+
 
 .post-body-text {
     font-family: 'Inconsolata', monospace;
