@@ -1,15 +1,22 @@
 // Delete your post
+
+// Get the post ID from the URL
+  const deleteUrlPath = window.location.pathname;
+  console.log(deleteUrlPath);
+  const deletePostId = urlPath.split("/")[2];
+  console.log("Current Post ID:", deletePostId);
+
 document.addEventListener("DOMContentLoaded", () => {
   const deletePostButton = document.getElementById("delete-post");
 
   if (deletePostButton) {
     deletePostButton.addEventListener("click", async (event) => {
       event.preventDefault();
-      const userPostId = event.target.closest(".edit-post-form").dataset.postId;
+      console.log("delete button clicked");
 
       if (confirm("Are you sure you want to delete this post?")) {
         try {
-          const response = await fetch(`/api/post/delete/${userPostId}`, {
+          const response = await fetch(`/api/posts/delete/${deletePostId}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -18,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (response.ok) {
             window.location.href = "/dashboard";
+            alert("Post deleted.");
           } else {
             console.error("Error deleting post");
           }
