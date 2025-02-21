@@ -2,9 +2,12 @@
   <div class="post-container">
     <div class="post">
       <h2 class="post-title-text">{{title}}</h2>
-      <p class="post-body-text" >{{post_content}}</p>
-      <p class="post-body-text">Posted by <i class="fa-solid fa-user"></i> <span class="bold-text">
-      {{username}}</span> on <i class="fa-solid fa-calendar"></i> <span class="bold-text">{{format_date createdAt}}</span>.</p>
+      <p class="post-body-text">{{post_content}}</p>
+      <p class="post-body-text">Posted by
+        <span class="bold-text">
+          {{username}}</span>
+        on
+        <span class="bold-text">{{format_date createdAt}}</span>.</p>
     </div>
   </div>
   <div class="comments-container">
@@ -13,16 +16,26 @@
       <div class="comment">
         <p class="post-body-text">{{content}}</p>
         <!-- Access the content property of the comment -->
-        <p class="post-body-text">Posted by <i class="fa-solid fa-user"></i> <span class="bold-text">{{Blogger.username}}</span> on <i class="fa-solid fa-calendar"></i> <span class="bold-text">{{format_date commentDate}}</span> .</p>
+        <p class="post-body-text">Posted by
+          <span class="bold-text">{{Blogger.username}}</span>
+          on
+          <span class="bold-text">{{format_date commentDate}}</span>
+          .</p>
       </div>
     {{/each}}
   </div>
-  <br>
+  <br />
   <form id="comment-form">
-    <label class="post-body-text" for="comment"> <span class="bold-text">Add a comment:</span></label>
-    <br>
-    <textarea id="commentDataToAdd" name="commentContent" rows="4" cols="50"></textarea>
-    <br>
+    <label class="post-body-text" for="comment">
+      <span class="bold-text">Add a comment:</span></label>
+    <br />
+    <textarea
+      id="commentDataToAdd"
+      name="commentContent"
+      rows="4"
+      cols="50"
+    ></textarea>
+    <br />
     <button class="post-body-text" type="submit">Submit</button>
   </form>
 </div>
