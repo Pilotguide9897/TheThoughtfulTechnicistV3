@@ -21,15 +21,15 @@ const sess = {
   },
 };
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self' https://cdnjs.cloudflare.com;"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     "Content-Security-Policy",
+//     "default-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com; script-src 'self' https://cdnjs.cloudflare.com;"
+//   );
+//   next();
+// });
 
-app.use(cors());
+//app.use(cors());
 
 app.use(session(sess));
 
