@@ -1,103 +1,99 @@
 :root {
-    --bgColor: #eae6e6;
+  --bgColor: #eae6e6;
 }
 
 .blogPosts {
-    margin-top: -33px;
+  margin-top: -33px;
 }
 
 .userBlogPosts {
-    margin-top: -33px;
+  margin-top: -33px;
 }
 
 #post-main {
-    background-color: var(--bgColor);
+  background-color: var(--bgColor);
 }
 
 .edit-section-title {
-    font-family: 'Inconsolata', monospace;
-    color: rgb(210, 159, 30);
+  font-family: "Inconsolata", monospace;
+  color: rgb(210, 159, 30);
 }
 
 #title-text {
-   font-family: 'Inconsolata', monospace;
-   font-size: x-large;
+  font-family: "Inconsolata", monospace;
+  font-size: x-large;
 }
 
 .navbar-text {
-    font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
 .post-title-text {
-    font-family: 'Inconsolata', monospace;
-    color: rgb(210, 159, 30);
+  font-family: "Inconsolata", monospace;
+  color: rgb(210, 159, 30);
 }
 
-::placeholder { /* Target all placeholders */
-      font-style: italic; /* Change the font style to italic */
-       font-family: 'Inconsolata', monospace;
-      color: gray; /* Change the color of the placeholder text */
-    }
+::placeholder {
+  /* Target all placeholders */
+  font-style: italic; /* Change the font style to italic */
+  font-family: "Inconsolata", monospace;
+  color: gray; /* Change the color of the placeholder text */
+}
 
 .homepage-viewIndividualPost {
-    margin-bottom: -15px;
+  margin-bottom: -15px;
 }
 
 #edit-title {
-    font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
 #edit-content {
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
 #commentDataToAdd {
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
-
 .post-body-text {
-    font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
 .post-body-text .bold-text {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
 }
 
 .userPost .bold-text {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-}
-
-.fa-laptop-code {
-    margin-right: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
 }
 
 .post {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .userPost {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .bg-lightblue {
-    background-color: var(--bgColor);
+  background-color: var(--bgColor);
 }
 
 .login-form {
-    background-color: var(--bgColor);
+  background-color: var(--bgColor);
 }
 
 .signup-form {
-    background-color: var(--bgColor);
+  background-color: var(--bgColor);
 }
 
 .myFooter {
-    text-align: center;
+  text-align: center;
 }
 
 #edit-post-form {
-    background-color: var(--bgColor);
+  background-color: var(--bgColor);
 }
