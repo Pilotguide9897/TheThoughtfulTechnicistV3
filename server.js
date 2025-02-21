@@ -6,6 +6,7 @@ const sequelize = require("./config/connection");
 const helpers = require("./utils/helpers");
 const session = require("express-session");
 const cors = require("cors");
+const helmet = require("helmet");
 
 // create an instance of the express app and define the port.
 const app = express();
@@ -21,13 +22,19 @@ const sess = {
   },
 };
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src *; img-src * data:; connect-src *; font-src *; style-src *; script-src *;"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     "Content-Security-Policy",
+//     "default-src *; img-src * data:; connect-src *; font-src *; style-src *; script-src *;"
+//   );
+//   next();
+// });
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 // app.use(cors);
 
